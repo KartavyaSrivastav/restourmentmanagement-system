@@ -1,0 +1,54 @@
+
+
+
+.navbar{
+    background-color: lightblue;
+}
+.Pickle{
+    background-color: lightcoral;
+    padding: 3%;
+    
+}
+
+* {
+    box-sizing: border-box;
+  }
+.column {
+    float: left;
+    padding: 0% 3% 0;
+    margin:auto
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+    padding: 3% 5%;
+    margin: auto;
+  }
+  .Pick{
+      height: 250px;
+      width: 350px;
+      margin: 10px;
+      text-align: center;
+  }
+  .container-fluid{
+      background-color: lightcoral;
+  }
+  .card-header{
+      background-color:lightsalmon;
+  }
+  .card{
+      margin: 5%;
+      border: 10px solid #111;
+
+  }
+  #footer{
+      text-align: center;
+      padding: 7% 25%;
+  }
+  .ico{
+      margin: 20px;
+      size: 5px;
+  }
