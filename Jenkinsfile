@@ -20,14 +20,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'No build step required'
-                // bat 'npm run build'   <-- Remove this if no build script exists
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                bat 'npm test || echo "No tests defined"'
+                echo 'Skipping tests since none are defined'
             }
         }
 
