@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Add deployment commands here if needed
+                // Add deployment commands here if needed or added
             }
         }
     }
@@ -50,3 +50,4 @@ pipeline {
         }
     }
 }
+
