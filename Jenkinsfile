@@ -1,58 +1,62 @@
 pipeline {
     agent any
 
+    environment {
+        // Optional: Define environment variables if needed
+        NODE_ENV = 'production'
+    }
+
     stages {
+
         stage('Checkout') {
             steps {
                 echo 'Fetching code from GitHub...'
-                checkout scm
+                // Checkout your repository
+                git branch: 'main', url: 'https://github.com/KartavyaSrivastav/restourmentmanagement-system.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installing Node.js dependencies...'
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    if (fileExists('package.json')) {
-                        echo 'Node.js project detected — running npm install and build'
-                        sh 'npm install'
-                        sh 'npm run build || echo "No build script found"'
-                    } else if (fileExists('composer.json')) {
-                        echo 'PHP project detected — running composer install'
-                        sh 'composer install || echo "Composer not installed"'
-                    } else {
-                        echo 'Static project detected — skipping build'
-                    }
-                }
+                echo 'Building the project...'
+                bat 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                script {
-                    if (fileExists('package.json')) {
-                        echo 'Running npm tests (if available)'
-                        sh 'npm test || echo "No tests found"'
-                    } else {
-                        echo 'No test stage configured for this project'
-                    }
-                }
+                echo 'Running tests...'
+                // Replace with your test command, e.g., npm test
+                bat 'npm test || echo "No tests defined"'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo '🚀 Demo deploy stage (replace with real commands)'
-                echo 'For example: copy build files to server, run docker-compose, etc.'
+                echo 'Deploying the application...'
+                // Add your deployment steps here, for example copy files to a folder
+                // bat 'xcopy /E /I dist\\* C:\\Deployments\\MyApp\\'
             }
         }
     }
 
     post {
         success {
-            echo '✅ Pipeline finished successfully'
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            echo '❌ Pipeline failed'
+            echo 'Pipeline failed. Check logs for details.'
+        }
+        always {
+            echo 'Cleaning up workspace...'
+            cleanWs()
         }
     }
 }
